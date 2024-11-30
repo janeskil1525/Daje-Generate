@@ -1,13 +1,29 @@
-package Daje::Generate;
-use 5.008001;
-use strict;
-use warnings;
+package  Daje::Generate;
+use Mojo::Base -signatures;
 
-our $VERSION = "0.01";
+use Daje::GenerateSQL;
+use Daje::GenerateSchema;
+use Daje::GeneratePerl;
 
+our $VERSION = '0.09';
+
+sub process ($self) {
+    Daje::GenerateSQL->new(
+        config_path => $self->config_path(),
+    )->process();
+    Daje::GenerateSchema->new(
+        config_path => $self->config_path(),
+    )->process();
+    Daje::GeneratePerl->new(
+        config_path => $self->config_path(),
+    )->process();
+}
 
 
 1;
+
+
+
 __END__
 
 =encoding utf-8
