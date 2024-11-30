@@ -1,35 +1,31 @@
-!Build/
-.last_cover_stats
-/META.yml
-/META.json
-/MYMETA.*
-*.o
-*.pm.tdy
-*.bs
+/.build/
+/_build/
+/Build
+/Build.bat
+/blib
+/Makefile
+/pm_to_blib
 
-# Devel::Cover
+/carton.lock
+/.carton/
+/local/
+
+nytprof.out
+nytprof/
+
 cover_db/
 
-# Devel::NYTProf
-nytprof.out
+*.bak
+*.old
+*~
+*.swp
+*.o
+*.obj
 
-# Dist::Zilla
-/.build/
+!LICENSE
 
-# Module::Build
-_build/
-Build
-Build.bat
+/_build_params
 
-# Module::Install
-inc/
+MYMETA.*
 
-# ExtUtils::MakeMaker
-/blib/
-/_eumm/
-/*.gz
-/Makefile
-/Makefile.old
-/MANIFEST.bak
-/pm_to_blib
-/*.zip
+/Daje-Generate-*
