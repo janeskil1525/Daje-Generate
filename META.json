@@ -70,7 +70,7 @@
          "web" : "https://github.com/janeskil1525/Daje-Generate"
       }
    },
-   "version" : "0.09",
+   "version" : "0.10",
    "x_serialization_backend" : "JSON::PP version 4.06",
    "x_static_install" : 1
 }

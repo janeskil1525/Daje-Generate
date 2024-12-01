@@ -1,6 +1,10 @@
+package class Daje::Generate::Tools::Datasections;
+use Mojo::Base -strict;
+
 use v5.40;
-use feature 'class';
-no warnings 'experimental::class';
+use Mojo::Loader qw {data_section};
+use Daje::Generate::Templates::Sql;
+use Daje::Generate::Templates::Perl;
 
 # Data::Load::Datasection  - Load and keep data sections from named *.pm
 #
@@ -10,19 +14,29 @@ no warnings 'experimental::class';
 # use GenerateSQL::Tools::Datasections
 #
 # my $data = GenerateSQL::Tools::Datasections->new(
+#
 #       data_sections => ['c1','c2','c3'],
+#
 #       source => 'Class::Containing::Datasections
+#
 #   )->load_data_sections();
 #
 # METHODS
 # =======
 # Get one section of loaded data
+#
 # my $c1 = $data->get_data_section('c1');
+#
 # Add a section of data
+#
 # $data->set_data_section('new_section', 'section data');
+#
 # Set a new source
+#
 # $data->set_source('New::Source');
+#
 # Add a new section to load
+#
 # $data->add_data_section('test');
 #
 #
@@ -41,53 +55,46 @@ no warnings 'experimental::class';
 
 our $VERSION = '0.01';
 
-class Daje::Generate::Tools::Datasections {
-    use Mojo::Loader qw {data_section};
-    use Daje::Generate::Templates::Sql;
-    use Daje::Generate::Templates::Perl;
-
-    field $data_sections :reader :param;
-    field $data_sec :reader = {};
-    field $source :reader :param;
+    has 'data_sections';
+    has 'data_sec';
+    has 'source';
 
     # Load all data_sections
-    method load_data_sections() {
+sub load_data_sections($self) {
 
-        try {
-            my @data_sec = split(',', $data_sections) ;
-            my $length = scalar @data_sec;
-            for(my $i = 0; $i < $length; $i++){
-                my $section = $data_sec[$i];
-                if (!exists($data_sec->{$section})) {
-                    my $sec = data_section($source, $section);
-                    $self->set_data_section($section,$sec);
-                }
+    try {
+        my @data_sec = split(',', $self->data_sections) ;
+        my $length = scalar @data_sec;
+        for(my $i = 0; $i < $length; $i++){
+            my $section = $data_sec[$i];
+            if (!exists($self->data_sec->{$section})) {
+                my $sec = data_section($self->source, $section);
+                $self->set_data_section($section, $sec);
             }
-        } catch ($e) {
-            die ("Error loading templates: $e");
-        };
+        }
+    } catch ($e) {
+        die ("Error loading templates: $e");
+    };
 
-        return 1;
-    }
-    # Get one section
-    method get_data_section($section) {
-        return $data_sec->{$section};
-    }
-    # Set a section
-    method set_data_section($key, $templ) {
-        $data_sec->{$key} = $templ;
-    }
-    # Set Source
-    method set_source($source_class) {
-        $source = $source_class;
-    }
-    # Add a section to the data sections_array to be loaded
-    method add_data_section($section) {
-        $data_sections .','. $section;
-    }
-
-
+    return 1;
 }
+# Get one section
+sub get_data_section($self, $section) {
+    return $self->data_sec->{$section};
+}
+# Set a section
+sub set_data_section($self, $key, $templ) {
+    $self->data_sec->{$key} = $templ;
+}
+# Set Source
+sub set_source($self, $source_class) {
+    $self->source = $source_class;
+}
+# Add a section to the data sections_array to be loaded
+sub add_data_section($self, $section) {
+    $self->data_sections .','. $section;
+}
+1;
 __DATA__
 
 @@ test1
@@ -100,6 +107,7 @@ This is also a sample text used for testing
 
 __END__
 1;
+
 
 
 
