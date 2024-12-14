@@ -1,10 +1,10 @@
 {
    "abstract" : "It's new $module",
    "author" : [
-      "janeskil1525 <janeskil1525@gmail.com>"
+      "This library is free software; you can redistribute it and/or modify"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v3.1.15, CPAN::Meta::Converter version 2.150010",
+   "generated_by" : "Minilla/v3.1.25, CPAN::Meta::Converter version 2.150010",
    "license" : [
       "perl_5"
    ],
@@ -43,13 +43,14 @@
       "runtime" : {
          "requires" : {
             "Config::Tiny" : "2.30",
+            "Daje::Tools::Datasections" : "0.08",
+            "Daje::Tools::Filechanged" : "0",
             "Digest::SHA" : "6.04",
             "Mojo::File" : "0",
             "Mojo::JSON" : "0",
             "String::CamelCase" : "0",
             "Syntax::Keyword::Match" : "0.15",
-            "Syntax::Operator::Matches" : "0",
-            "perl" : "5.40"
+            "Syntax::Operator::Matches" : "0"
          }
       },
       "test" : {
@@ -71,6 +72,9 @@
       }
    },
    "version" : "0.10",
-   "x_serialization_backend" : "JSON::PP version 4.06",
+   "x_contributors" : [
+      "janeskil1525 <janeskil1525@gmail.com>"
+   ],
+   "x_serialization_backend" : "JSON::PP version 4.16",
    "x_static_install" : 1
 }
