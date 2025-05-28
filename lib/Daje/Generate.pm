@@ -11,6 +11,8 @@ has 'config_path';
 #
 # Daje::Generate - It's new $module
 #
+# OBSOLETE
+#
 # SYNOPSIS
 # ========
 #     use Daje::Generate;
@@ -48,7 +50,7 @@ has 'config_path';
 #
 #
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 sub process ($self) {
     Daje::GenerateSQL->new(
